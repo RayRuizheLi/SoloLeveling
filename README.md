@@ -99,3 +99,6 @@ The system features will be completed one by one. The due date for the next feat
     * Privacy of the user must be respected. 
 * Portability 
     * Nice to have feature is to be able to easily upload and download the project.
+
+### Todos
+* Store every test as JSON

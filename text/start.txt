@@ -1,0 +1,2 @@
+start_prompt:
+Weclome to Solo Leveling C: 
