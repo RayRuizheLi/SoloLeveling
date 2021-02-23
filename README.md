@@ -25,7 +25,7 @@ Earns coins for each completed task. User can spend the coins for user-defined r
 #### Level up system
 Each completed task generates exp. Based on the type of task that was completed, the user should gain levels in the matching category. 
 
-#### Coverage
+#### Covera
 Daily tasks, habits, long term goals, short term goals, school, work.
 
 #### Duration
@@ -65,6 +65,10 @@ The idea is to keep this software and maintain it for a lifetime
     * Milestones can have many tickets
 * Long term goal:  1 month plus
 * Short term goal: 1 week plus
+* Weekly reviews:
+    * View the tickets that was done this week by categories
+    * View the tickets that was done this week by same tickets
+    * Set goals for each week
 
 #### Rewards System
 * Each task will generate coins according to the difficulty level.
@@ -102,3 +106,13 @@ The system features will be completed one by one. The due date for the next feat
 
 ### Todos
 * Store every test as JSON
+
+### Issues
+* Delete should not be delete. It should be done or complete 
+* A faster way of inputing ticket would be nice
+* It would be nice if I can add the 25 minutes counter feature
+* Add different categories for tickets. Show only specific categories or exclude specific catagories. 
+* Need a way to actually delete tickets
+* remove next line if notes is empty
+
+
