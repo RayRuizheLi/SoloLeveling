@@ -8,7 +8,7 @@ Management and metrics software to track projects and personal interests.
 ### Product Scope 
 
 #### Ticketing system 
-Tracks and stores tickets for school, work, and interests. 
+Tracks and stores tickets for school, work, and interests. (done)
 
 #### Metric system
 Tracks the time spent and progress for different projects, hobbies, and habits. Display the data on a graph or other easy to read user interface. 

@@ -68,10 +68,7 @@ def start():
                 print(f"Options: {controller.show_tags()} or 'all'")                
                 tag = input("Pick a tag: ")
 
-                if controller.switch_tag(tag):
-                    print(f"Switched to {tag} tag (:")
-                else:
-                    print("Tag does not exist")
+                print(f"Switched to {tag} tag (:")
 
             elif command == "exit":
                 print("Solo Leveling system closed. See you soon (:")

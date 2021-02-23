@@ -1,0 +1,23 @@
+Basic goal system
+
+- Repetative goal
+    - Do x y amount of times
+    - Spawn same ticket when one is completed 
+    - Individual tickets are stored in the same table as Todo 
+    - Each repeatative goal is stored in the goals table
+    - Count by checking how many tickets have the same title
+    - Shows progress indicator [====-----]
+    - Goal should have a starting time and end time. 
+    - Hide ticket by a 'visibility' tag
+
+- Goals with different milestones 
+    - Do a then do b then do c 
+    - Setup prompts user to input all the different goals all at once. 
+    - Milestones should start with a number
+    - Each milestone is a ticket and is stored in the todo list
+    - The milestone itself is stored on the goals list
+        - Should store a tag that indicates which tickets belong to this goal 
+        - Should store a list of ticket names. When finish a ticket, pop the first name, and make the next ticket available. 
+            - Hide ticket through a "visible" tag
+    - goal should have a starting time and end time 
+    - Maybe we can make this as a infinite tree stucture 
