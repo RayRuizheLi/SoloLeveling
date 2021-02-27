@@ -8,7 +8,6 @@ Basic goal system
     - Count by checking how many tickets have the same title
     - Shows progress indicator [====-----]
     - Goal should have a starting time and end time. 
-    - Hide ticket by a 'visibility' tag
 
 - Goals with different milestones 
     - Do a then do b then do c 
@@ -20,4 +19,27 @@ Basic goal system
         - Should store a list of ticket names. When finish a ticket, pop the first name, and make the next ticket available. 
             - Hide ticket through a "visible" tag
     - goal should have a starting time and end time 
-    - Maybe we can make this as a infinite tree stucture 
+    - Maybe we can make this as a infinite tree stucture  
+
+New fields in the todo list:
+start date, end date, goal tag, reward tag, visibility
+
+New Goals list: 
+ID, start date, end date, title, name of tickets, total count, completed count
+
+How does the goal controller work?
+- User chooses between a repeat goal or milestones
+- User creates a goal and specify the amount of repeat
+    - goal controller creates the first ticket. 
+    - When a ticket is completed, the todo controller checks if there is a goal tag.
+    - It prompts the goal_controller to update progress and create the next ticket in todo. 
+- User creates a milestones and a create ticket prompt appears
+    - User can continue to create more milestones until the user stops
+        - Each milestone is added by the todo controller as a normal ticket except visibility off. 
+        - Each milestone ticket name is created and stored in the milestones ticket seperated by a comma. 
+    - When a ticket is completed, the todo controller checks if there is a goal tag.
+    - It prompts the goal_controller to update progress and turn the next ticket's visibility to true
+        - We know the ticket is the same ticket by ticket name + goal tag 
+- Uses [===----] to indicate the progress 
+- Show due date and if needed 
+

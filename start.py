@@ -1,6 +1,6 @@
 import psycopg2
 
-from ticketingSystem.controller import Controller
+from ticketingSystem.todo_controller import TodoController
 
 def connect_db():
     try:
@@ -34,7 +34,7 @@ def start():
 
     if(connection):
         
-        controller = Controller(connection, select_list())
+        controller = TodoController(connection, select_list())
 
         while(True):
             controller.show()

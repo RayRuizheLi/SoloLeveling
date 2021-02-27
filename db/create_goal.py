@@ -10,20 +10,21 @@ try:
 
     cursor = connection.cursor()
 
-    cursor.execute('''DROP TABLE IF EXISTS todo;''')
+    cursor.execute('''DROP TABLE IF EXISTS goal;''')
 
 
     # SQL query to create a new table
-    create_table_query = '''CREATE TABLE todo
+    create_table_query = '''CREATE TABLE goal
           (ID             SERIAL PRIMARY KEY,
           TITLE           VARCHAR    NOT NULL,
           NOTE            TEXT,
-          DIFFICULTY      INT        NOT NULL,
+          TICKETS         TEXT       NOT NULL,
+          COUNTS          INT        NOT NULL,
+          COUNTS_DONE     INT        NOT NULL,
           TAG             VARCHAR    NOT NULL,
           COMPLETED       BOOLEAN    NOT NULL,
           START_DATE      TIMESTAMP  NOT NULL,
           END_DATE        TIMESTAMP,
-          GOAL            VARCHAR,
           REWARD          VARCHAR); ''' 
 
     # Execute a command: this creates a new table

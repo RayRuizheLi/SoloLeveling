@@ -1,6 +1,7 @@
 import psycopg2
+from datetime import datetime
 
-class Controller:
+class TodoController:
     def __init__(self, connection, list):
         self.connection = connection
         self.list = list
@@ -26,13 +27,17 @@ class Controller:
     def switch_tag(self, tag):
             self.tag = tag
 
-    def add_ticket(self, title, note, diff, tag):
+    def add_goal(self, title, note, diff, tag):
         try: 
             cursor = self.connection.cursor()
 
-            insert_ticket = (f"INSERT INTO {self.list} (TITLE, NOTE, DIFFICULTY, TAG, COMPLETED) VALUES (%s, %s, %s, %s, FALSE)")
+            dt = datetime.now()
 
-            cursor.execute(insert_ticket, [title, note, diff, tag])
+            insert_ticket = (f"INSERT INTO {self.list} (TITLE, NOTE, DIFFICULTY," +
+                             f"TAG, COMPLETED, START_DATE) VALUES (%s, %s, %s," + 
+                             f"%s, FALSE, %s)")
+
+            cursor.execute(insert_ticket, [title, note, diff, tag, dt])
             self.connection.commit()
 
             return True
@@ -46,9 +51,12 @@ class Controller:
         try: 
             cursor = self.connection.cursor()
 
-            done_ticket = (f"UPDATE {self.list} SET completed = TRUE WHERE id = %s")
+            dt = datetime.now()
 
-            cursor.execute(done_ticket, [id])
+            done_ticket = (f"UPDATE {self.list} SET completed = TRUE," +
+                           f"end_date = %s WHERE id = %s")
+
+            cursor.execute(done_ticket, [dt, id])
             self.connection.commit()
 
             return True

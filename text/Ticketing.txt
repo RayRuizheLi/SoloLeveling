@@ -2,3 +2,7 @@ Todo list for creating a multi-listing ticketing system:
 
 - We will have different types of tickets such as work, normal, on the same table, seperated by a tag. (done)
     - User can list all the different tags and pick which tag they would like to see (done)
+
+- next day feature. Add the tickets at the end of the day
+
+- Get the sw function working
