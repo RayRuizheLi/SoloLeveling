@@ -12,7 +12,8 @@ class TodoController:
             # query all the items with tag 
             cursor = self.connection.cursor()
 
-            distinct_tag = (f"SELECT DISTINCT tag FROM {self.list}")
+            distinct_tag = (f"SELECT DISTINCT tag FROM {self.list} " +
+                            f"WHERE visible = TRUE" )
             cursor.execute(distinct_tag)
 
             result = cursor.fetchall()
@@ -34,8 +35,8 @@ class TodoController:
             dt = datetime.now()
 
             insert_ticket = (f"INSERT INTO {self.list} (TITLE, NOTE, DIFFICULTY," +
-                             f"TAG, COMPLETED, START_DATE) VALUES (%s, %s, %s," + 
-                             f"%s, FALSE, %s)")
+                             f"TAG, COMPLETED, START_DATE, VISIBLE) VALUES (%s, %s, %s," + 
+                             f"%s, FALSE, %s, TRUE)")
 
             cursor.execute(insert_ticket, [title, note, diff, tag, dt])
             self.connection.commit()
@@ -47,7 +48,7 @@ class TodoController:
 
             return False
             
-    def del_ticket(self, id):
+    def done_ticket(self, id):
         try: 
             cursor = self.connection.cursor()
 
@@ -57,6 +58,24 @@ class TodoController:
                            f"end_date = %s WHERE id = %s")
 
             cursor.execute(done_ticket, [dt, id])
+            self.connection.commit()
+
+            return True
+
+        except (Exception, psycopg2.Error) as error:
+            print("Error while connecting to PostgreSQL", error)
+
+            return False
+
+    def del_ticket(self, id):
+        try: 
+            cursor = self.connection.cursor()
+
+            dt = datetime.now()
+
+            del_ticket = (f"DELETE FROM {self.list} WHERE id = %s;")
+
+            cursor.execute(del_ticket, [id])
             self.connection.commit()
 
             return True

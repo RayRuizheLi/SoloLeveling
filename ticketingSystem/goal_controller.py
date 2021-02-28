@@ -1,11 +1,14 @@
 import psycopg2
 from datetime import datetime
 
-class TodoController:
-    def __init__(self, connection, list):
+from todo_controller import TodoController
+
+class GoalController:
+    def __init__(self, connection, list, todo_list):
         self.connection = connection
         self.list = list
         self.tag = "all"
+        self.controller = TodoController(connection, todo_list)
 
     def show_tags(self):
         try: 
@@ -27,17 +30,24 @@ class TodoController:
     def switch_tag(self, tag):
             self.tag = tag
 
-    def add_goal(self, title, note, diff, tag):
+    def add_repeat_goal(self):
         try: 
             cursor = self.connection.cursor()
 
+            title = input("Title: ")
+            note = input("Note: ")
+            repeat = input("Repeat: ")
+            tag = input("Tag: ")
+            ticket_title = input("Ticket title: ")
+            ticket_note = input("Ticket note: ")
             dt = datetime.now()
 
-            insert_ticket = (f"INSERT INTO {self.list} (TITLE, NOTE, DIFFICULTY," +
-                             f"TAG, COMPLETED, START_DATE) VALUES (%s, %s, %s," + 
+            insert_ticket = (f"INSERT INTO {self.list} (TITLE, NOTE," +
+                             f"TICKETS, COUNT, COUNTS_DONE, TAG, COMPLETED," +
+                             f"START_DATE) VALUES (%s, %s, %s, %s, 0" + 
                              f"%s, FALSE, %s)")
 
-            cursor.execute(insert_ticket, [title, note, diff, tag, dt])
+            cursor.execute(insert_ticket, [title, note, ticket_title, repeat, tag, dt])
             self.connection.commit()
 
             return True

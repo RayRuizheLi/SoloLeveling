@@ -6,3 +6,4 @@ Todo list for creating a multi-listing ticketing system:
 - next day feature. Add the tickets at the end of the day
 
 - Get the sw function working
+- add an actual delete functions 

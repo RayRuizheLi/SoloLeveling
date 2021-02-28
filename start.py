@@ -39,7 +39,8 @@ def start():
         while(True):
             controller.show()
 
-            command = input("Take a step: add ticket(add) | done ticket(done) | switch (sw) | exit (exit)\n")
+            command = input("Take a step: add ticket(add) | done ticket(done) | switch (sw) \n" + 
+                            "             delete (del) | exit (exit) \n")
 
             if command == "add":
                 title = input("Title: ")
@@ -57,16 +58,28 @@ def start():
             elif command == "done":
                 id = input("ID: ")
 
-                query = controller.del_ticket(id)
+                query = controller.done_ticket(id)
 
                 if query:
-                    print("Deleted 1 ticket.")
+                    print("Completed 1 ticket.")
                 else:
-                    print("Failed to delete ticket ):")
+                    print("Failed to complete ticket ):")
+            
+            elif command == "del":
+                id = input("ID: ")
+
+                query = controller.del_ticket(id)
+
+                if query: 
+                    print("Deleted 1 ticket.")
+                else: 
+                    print("Failed to deleted ticket ):")
 
             elif command == "sw":
                 print(f"Options: {controller.show_tags()} or 'all'")                
                 tag = input("Pick a tag: ")
+
+                controller.switch_tag(tag)
 
                 print(f"Switched to {tag} tag (:")
 

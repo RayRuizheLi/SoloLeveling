@@ -23,6 +23,7 @@ try:
           COMPLETED       BOOLEAN    NOT NULL,
           START_DATE      TIMESTAMP  NOT NULL,
           END_DATE        TIMESTAMP,
+          VISIBLE         BOOLEAN    NOT NULL,
           GOAL            VARCHAR,
           REWARD          VARCHAR); ''' 
 
