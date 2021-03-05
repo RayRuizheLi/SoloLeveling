@@ -168,7 +168,7 @@ class TodoController:
             incomplete = (f"SELECT * FROM {self.list} WHERE completed = FALSE AND visible = TRUE")
 
             if self.tag != "all":
-                incomplete = (f"SELECT * FROM {self.list} WHERE completed = FALSE AND tag = %s")
+                incomplete = (f"SELECT * FROM {self.list} WHERE completed = FALSE AND visible = TRUE AND tag = %s")
 
             if self.tag != "all":
                 cursor.execute(incomplete, [self.tag])
