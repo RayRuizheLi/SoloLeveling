@@ -9,29 +9,13 @@ try:
                                   database="solo")
 
     cursor = connection.cursor()
-
-    cursor.execute('''DROP TABLE IF EXISTS goal;''')
-
-
     # SQL query to create a new table
-    create_table_query = '''CREATE TABLE goal
-          (ID             SERIAL PRIMARY KEY,
-          TITLE           VARCHAR    NOT NULL,
-          NOTE            TEXT,
-          TICKETS         TEXT       NOT NULL,
-          COUNTS          INT        NOT NULL,
-          COUNTS_DONE     INT        NOT NULL,
-          TAG             VARCHAR    NOT NULL,
-          TYPE            VARCHAR    NOT NULL,
-          COMPLETED       BOOLEAN    NOT NULL,
-          START_DATE      TIMESTAMP  NOT NULL,
-          END_DATE        TIMESTAMP,
-          REWARD          VARCHAR); ''' 
+    create_table_query = '''rollback; ''' 
 
     # Execute a command: this creates a new table
     cursor.execute(create_table_query)
     connection.commit()
-    print("Todo table created successfully in PostgreSQL")
+    print("Rollback successfully in PostgreSQL")
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)

@@ -47,12 +47,68 @@ class TodoController:
             print("Error while connecting to PostgreSQL", error)
 
             return False
+
+    def update_goal(self, id):
+        try: 
+            cursor = self.connection.cursor()
+
+            goal = (f"SELECT * FROM {self.list} WHERE" +
+                    f" id = %s")
+
+            cursor.execute(goal, [id])
+
+            result = cursor.fetchall()
+
+            goal = (f"SELECT goal FROM {self.list} WHERE" +
+                    f" id = %s")
+
+            cursor.execute(goal, [id])
+
+            result = cursor.fetchall()
+        
+            if result[0][0] == None:
+                return 
+
+            # Get the goal ticket counts done
+            goal = (f"SELECT counts_done FROM goal WHERE" +
+                           f" title = %s")
+            cursor.execute(goal, [result[0][0]])
+
+            counts_done = cursor.fetchall()[0][0]
+
+            counts_done += 1
+
+            goal = (f"UPDATE goal SET counts_done = %s " +
+                    f"WHERE title = %s")
+
+            cursor.execute(goal, [counts_done, result[0][0]])
+            self.connection.commit()
+
+            id = int(id)
+            id += 1
+            
+            ticket = (f"UPDATE {self.list} SET visible = TRUE " +
+                      f"WHERE id = %s")
+
+            cursor.execute(ticket, [id])
+            self.connection.commit()
+
+            print("update goal completed")
+
+        except (Exception, psycopg2.Error) as error:
+            print("Error while connecting to PostgreSQL", error)
+
+            return False
             
     def done_ticket(self, id):
         try: 
             cursor = self.connection.cursor()
 
             dt = datetime.now()
+
+            print("call update goal")
+            self.update_goal(id)
+            
 
             done_ticket = (f"UPDATE {self.list} SET completed = TRUE," +
                            f"end_date = %s WHERE id = %s")
@@ -94,13 +150,14 @@ class TodoController:
                 title = results[i][1]
                 notes = results[i][2]
                 diff = results[i][3]
+                tag = results[i][4]
                 stars = ""
                 
                 for star in range(diff):
                     stars += "*"
 
                 print("* Ticket:")
-                print("    {} | Diff: {} | ID: {}".format(title, stars, id))
+                print("    {} | Diff: {} | ID: {} | Tag: {}".format(title, stars, id, tag))
                 print("  Notes: \n    {}".format(notes))
                 print("")
 
@@ -108,7 +165,7 @@ class TodoController:
         try: 
             cursor = self.connection.cursor()
 
-            incomplete = (f"SELECT * FROM {self.list} WHERE completed = FALSE")
+            incomplete = (f"SELECT * FROM {self.list} WHERE completed = FALSE AND visible = TRUE")
 
             if self.tag != "all":
                 incomplete = (f"SELECT * FROM {self.list} WHERE completed = FALSE AND tag = %s")
